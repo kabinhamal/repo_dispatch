@@ -14,7 +14,8 @@ jobs:
         id: read_file
         run: |
           CONTENT=$(cat repo.json)
-           echo "REPO_JSON=$(jq -r repo.json)" >> $GITHUB_ENV
+          echo ${CONTENT}
+          # echo "REPO_JSON=$(jq -r repo.json)" >> $GITHUB_ENV
         shell: bash
 
       - name: Repo Dispatch
