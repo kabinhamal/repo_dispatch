@@ -1,5 +1,4 @@
-{
-  "payload": {
+ {
     "newyork": {
       "env": "dev",
       "managed_asg": true,
@@ -9,4 +8,4 @@
       "additional_tags": {}
     }
   }
-}
+
