@@ -1,28 +1,29 @@
-name: Trigger repofile
+name: Trigger repo (successful)
 on:
-  - push
+  - push:
   - workflow_dispatch
 
-jobs:
-  Repo-Dispatch-callee_repo:
-    runs-on: ubuntu-latest
+env:
+  REPO_JSON: ${{ steps.read_file.outputs.content }}
 
+jobs:
+  Repo-Dispatch-calee_repo:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set REPO_JSON variable
+      - name: Read repo.json file
+        id: read_file
         run: |
-          repo=$(cat repo.json)
-          echo "REPO_JSON=$repo" >> $GITHUB_ENV
+          CONTENT=$(cat repo.json)
+          echo "##[set-output name=content;]$CONTENT"
         shell: bash
-
-        
 
       - name: Repo Dispatch
         id: dispatch
         uses: kabinhamal/repo_dispatch/dispatch@main
-        env:
-          REPO_JSON: ${{ secrets.REPO_JSON }}
-          TARGET_REPO: ${{ secrets.TARGET_REPO }}
+        with:
+          payload: ${{ env.REPO_JSON }}
+          TARGET_REPO: ${{ env.TARGET_REPO }}
           func_token: ${{ secrets.func_token }}
-          workflow_id: repo_dispatch1
+          workflow_id: ${{ env.workflow_id }}
