@@ -1,4 +1,4 @@
-name: Trigger repo (successful)
+name: Trigger repofile
 on:
   - push
   - workflow_dispatch
@@ -18,8 +18,8 @@ jobs:
       - name: Repo Dispatch
         id: dispatch
         uses: kabinhamal/repo_dispatch/dispatch@main
-        with:
-          payload: ${{ env.REPO_JSON }}
-          TARGET_REPO: callee_repo
+        env:
+          REPO_JSON: ${{ secrets.REPO_JSON }}
+          TARGET_REPO: ${{ secrets.TARGET_REPO }}
           func_token: ${{ secrets.func_token }}
           workflow_id: repo_dispatch1
