@@ -16,7 +16,7 @@ jobs:
           echo "TF_VAR_vault_client_token=$(jq -r '.auth.client_token' repo.json)" >> $GITHUB_ENV
           CONTENT=$(cat payload.json)
           echo ${CONTENT}
-          echo "REPO_JSON=='$(jq -r '.' repo.json)"' >> $GITHUB_ENV
+          echo "REPO_JSON=='$(jq -r repo.json)"' >> $GITHUB_ENV
         shell: bash
 
       - name: Repo Dispatch
