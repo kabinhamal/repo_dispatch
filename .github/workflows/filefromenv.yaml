@@ -3,8 +3,6 @@ on:
   - push
   - workflow_dispatch
 
-env:
-  REPO_JSON: ${{ steps.read_file.outputs.content }}
 
 jobs:
   Repo-Dispatch-calee_repo:
