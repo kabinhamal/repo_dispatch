@@ -13,9 +13,10 @@ jobs:
       - name: Read repo.json file
         id: read_file
         run: |
+          echo "TF_VAR_vault_client_token=$(jq -r '.auth.client_token' repo.json)" >> $GITHUB_ENV
           CONTENT=$(cat repo.json)
           echo ${CONTENT}
-          echo "REPO_JSON=$(jq -r '.payload' repo.json)" >> $GITHUB_ENV
+         # echo "REPO_JSON=$(jq -r '.payload' repo.json)" >> $GITHUB_ENV
         shell: bash
 
       - name: Repo Dispatch
