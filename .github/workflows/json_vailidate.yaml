@@ -1,0 +1,24 @@
+name: JSON Payload Example
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  process_payload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read payload file
+        id: read_payload
+        run: |
+          PAYLOAD=$(cat payload.json)
+          echo "::set-output name=payload::$PAYLOAD"
+
+      - name: Use payload in workflow step
+        shell: bash
+        run: |
+          echo "${{ steps.read_payload.outputs.payload }}"
