@@ -2,6 +2,10 @@ name: Json from env files
 on:
  # - push
   - workflow_dispatch
+ 
+env:
+  workflow_id: "repo_dispatch1"
+  TARGET_REPO: "callee_repo"
 
 jobs:
   Repo-Dispatch-callee_repo:
