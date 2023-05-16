@@ -10,11 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Read repo.json
-        id: read-repo
+      - name: Set REPO_JSON variable
         run: |
-          repo = $(cat repo.json)
+          repo=$(cat repo.json)
           echo "REPO_JSON=$repo" >> $GITHUB_ENV
+        shell: bash
+
         
 
       - name: Repo Dispatch
