@@ -1,6 +1,6 @@
-name: Json from env files
+name: Json_files_inputs
 on:
- # - push
+  - push
   - workflow_dispatch
  
 env:
