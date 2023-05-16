@@ -1,5 +1,5 @@
-'{
-  "nepal": {
+{
+  "newyork": {
     "env": "dev",
     "managed_asg": true,
     "instance": "003",
@@ -7,4 +7,4 @@
     "purpose": "test",
     "additional_tags": {}
   }
-}'
+}
