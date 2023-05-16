@@ -8,7 +8,7 @@ def main():
     org =  str(os.environ["org"])
     callee_repo_name =  str(os.environ["callee_repo_name"])
     func_token =  str(os.environ["func_token"])
-    payload =  str(os.environ["appID"])
+    payload =  str(os.environ["payload"])
     workflow_id = str(os.environ["workflow_id"])
     
 
