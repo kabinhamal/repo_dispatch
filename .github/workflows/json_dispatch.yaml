@@ -11,7 +11,7 @@ env:
 
 jobs:
 
-    Repo-Dispatch-Hashi_Vault_Secrets_Setup:
+    Repo-Dispatch-calee_repo:
         runs-on: ubuntu-latest   
       
         steps: 
