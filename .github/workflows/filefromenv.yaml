@@ -15,7 +15,7 @@ jobs:
         run: |
           CONTENT=$(cat repo.json)
           echo ${CONTENT}
-          echo "REPO_JSON=${CONTENT}" >> $GITHUB_ENV
+          echo "REPO_JSON=$(cat repo.json)" >> $GITHUB_ENV
         shell: bash
 
       - name: Repo Dispatch
