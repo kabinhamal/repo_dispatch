@@ -1,0 +1,25 @@
+name: Json from env files
+on:
+ # - push
+  - workflow_dispatch
+
+jobs:
+  Repo-Dispatch-callee_repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Read repo.json
+        id: read-repo
+        run: |
+          echo "REPO_JSON=$(cat repo.json)" >> $GITHUB_ENV
+
+      - name: Repo Dispatch
+        id: dispatch
+        uses: kabinhamal/repo_dispatch/dispatch@main
+        with:
+          payload: ${{ env.REPO_JSON }}
+          TARGET_REPO: "callee_repo"
+          func_token: ${{ secrets.func_token }}
+          workflow_id: "repo_dispatch"
