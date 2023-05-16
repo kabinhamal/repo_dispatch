@@ -1,0 +1,12 @@
+{
+  "payload": {
+    "newyork": {
+      "env": "dev",
+      "managed_asg": true,
+      "instance": "003",
+      "location": "EASTUS",
+      "purpose": "test",
+      "additional_tags": {}
+    }
+  }
+}
