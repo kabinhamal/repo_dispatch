@@ -26,4 +26,4 @@ jobs:
           payload: ${{ env.REPO_JSON }}
           TARGET_REPO: ${{ env.TARGET_REPO }}
           func_token: ${{ secrets.func_token }}
-          workflow_id: ${{ env.workflow_id }}
+          workflow_id: ${{ repo_dispatch1 }}
