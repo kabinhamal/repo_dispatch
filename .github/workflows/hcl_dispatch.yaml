@@ -13,7 +13,7 @@ env:
       purpose         = "test"
       additional_tags = {}
     }
-  workflow_id: "repo_dispatch"
+  workflow_id: "repo_dispatch1"
   TARGET_REPO: "callee_repo"
      
     
