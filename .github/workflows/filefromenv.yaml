@@ -9,19 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-#       - name: Read repo.json file
-#         id: read_file
-#         run: |
-#           echo "TF_VAR_vault_client_token=$(jq -r '.auth.client_token' repo.json)" >> $GITHUB_ENV
-#           json_str=$(jq -Rs '.' payload.json)
-#           echo "$json_str" > output.json_str
-#           CONTENT=$(cat  output.json_str)
-#           echo ${CONTENT}
-          
-#           echo "REPO_JSON='$CONTENT'" >> $GITHUB_ENV
-#          # echo "REPO_JSON=='$(jq -r $CONTENT)'" >> $GITHUB_ENV
-#         shell: bash
       
       - name: Convert JSON to JSON string
         shell: bash
