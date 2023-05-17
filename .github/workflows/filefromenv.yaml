@@ -19,7 +19,7 @@ jobs:
           CONTENT=$(cat  output.json_str)
           echo ${CONTENT}
           
-          echo "REPO_JSON='$CONTENT'" >> $GITHUB_OUTPUTS
+          echo "REPO_JSON='$CONTENT'" >> $GITHUB_ENV
          # echo "REPO_JSON=='$(jq -r $CONTENT)'" >> $GITHUB_ENV
         shell: bash
 
