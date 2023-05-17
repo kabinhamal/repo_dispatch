@@ -27,7 +27,7 @@ jobs:
         id: dispatch
         uses: kabinhamal/repo_dispatch/dispatch@main
         with:
-          payload: $(cat payload.json)
+          payload: ${{env.payload}}
           TARGET_REPO: ${{ env.TARGET_REPO }}
           func_token: ${{ secrets.func_token }}
           workflow_id: repo_dispatch1
