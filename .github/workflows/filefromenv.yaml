@@ -28,7 +28,7 @@ jobs:
         run: |
           CONTENT=$(cat payload.json)
           echo "$CONTENT"
-          json_string=$(echo "$CONTENT" | jq -c -R .)
+          json_string=$(echo "$CONTENT" | jq -c .)
           echo "'$json_string'"
 
 #       - name: Repo Dispatch
