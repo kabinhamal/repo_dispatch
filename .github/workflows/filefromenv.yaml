@@ -30,12 +30,13 @@ jobs:
           echo "$CONTENT"
           json_string=$(echo "$CONTENT" | jq -c .)
           echo "'$json_string'"
+          echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
-#       - name: Repo Dispatch
-#         id: dispatch
-#         uses: kabinhamal/repo_dispatch/dispatch@main
-#         with:
-#           payload: ${{env.REPO_JSON}}
-#           TARGET_REPO: ${{ env.TARGET_REPO }}
-#           func_token: ${{ secrets.func_token }}
-#           workflow_id: repo_dispatch1
+      - name: Repo Dispatch
+        id: dispatch
+        uses: kabinhamal/repo_dispatch/dispatch@main
+        with:
+          payload: ${{env.REPO_JSON}}
+          TARGET_REPO: ${{ env.TARGET_REPO }}
+          func_token: ${{ secrets.func_token }}
+          workflow_id: repo_dispatch1
