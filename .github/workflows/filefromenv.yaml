@@ -10,24 +10,32 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Read repo.json file
-        id: read_file
-        run: |
-          echo "TF_VAR_vault_client_token=$(jq -r '.auth.client_token' repo.json)" >> $GITHUB_ENV
-          json_str=$(jq -Rs '.' payload.json)
-          echo "$json_str" > output.json_str
-          CONTENT=$(cat  output.json_str)
-          echo ${CONTENT}
+#       - name: Read repo.json file
+#         id: read_file
+#         run: |
+#           echo "TF_VAR_vault_client_token=$(jq -r '.auth.client_token' repo.json)" >> $GITHUB_ENV
+#           json_str=$(jq -Rs '.' payload.json)
+#           echo "$json_str" > output.json_str
+#           CONTENT=$(cat  output.json_str)
+#           echo ${CONTENT}
           
-          echo "REPO_JSON='$CONTENT'" >> $GITHUB_ENV
-         # echo "REPO_JSON=='$(jq -r $CONTENT)'" >> $GITHUB_ENV
+#           echo "REPO_JSON='$CONTENT'" >> $GITHUB_ENV
+#          # echo "REPO_JSON=='$(jq -r $CONTENT)'" >> $GITHUB_ENV
+#         shell: bash
+      
+      - name: Convert JSON to JSON string
         shell: bash
+        run: |
+          CONTENT=$(cat payload.json)
+          echo "$CONTENT"
+          json_string=$(echo "$CONTENT" | jq -c -R .)
+          echo "'$json_string'"
 
-      - name: Repo Dispatch
-        id: dispatch
-        uses: kabinhamal/repo_dispatch/dispatch@main
-        with:
-          payload: ${{env.REPO_JSON}}
-          TARGET_REPO: ${{ env.TARGET_REPO }}
-          func_token: ${{ secrets.func_token }}
-          workflow_id: repo_dispatch1
+#       - name: Repo Dispatch
+#         id: dispatch
+#         uses: kabinhamal/repo_dispatch/dispatch@main
+#         with:
+#           payload: ${{env.REPO_JSON}}
+#           TARGET_REPO: ${{ env.TARGET_REPO }}
+#           func_token: ${{ secrets.func_token }}
+#           workflow_id: repo_dispatch1
