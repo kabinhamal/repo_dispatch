@@ -21,6 +21,10 @@
   workflow_id:
        description: The ID of the workflow. You can also pass the workflow file name as a string
        required: true
+   branch:
+        required: false
+        default: main
+        
   
 
  runs:
@@ -48,6 +52,7 @@
         callee_repo_name:  ${{ inputs.callee_repo_name }}
         func_token:  ${{ inputs.func_token}} 
         workflow_id: ${{ inputs.workflow_id}} 
+        branch: ${{ inputs.branch}}
       run: |
        echo "${GITHUB_ACTION_PATH}"
        python ${GITHUB_ACTION_PATH}/src/main.py  
