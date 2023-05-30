@@ -20,7 +20,7 @@ jobs:
               
           - name: Repo Dispatch
             id: dispatch
-            uses: kabinhamal/repo_dispatch/dispatch@main
+            uses: kabinhamal/repo_dispatch/dispatch@feature
             with:
               payload: ${{ env.payload }}                     
               TARGET_REPO: ${{ env.TARGET_REPO }} 
