@@ -1,4 +1,4 @@
-name: Trigger repo (successful)
+name: Trigger repo feature (successful)
 on:
    # - push  
    -  workflow_dispatch
