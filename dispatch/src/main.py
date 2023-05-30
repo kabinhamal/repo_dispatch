@@ -14,13 +14,13 @@ def main():
     
 
     
-    repo_dispatch(payload, workflow_id, github_url, org, callee_repo_name, func_token)
+    repo_dispatch(payload, workflow_id, github_url, org, callee_repo_name, func_token, branch)
     
     
     
     
 
-def repo_dispatch(payload, workflow_id, github_url, org, callee_repo_name, func_token):
+def repo_dispatch(payload, workflow_id, github_url, org, callee_repo_name, func_token, branch):
     headers = {
         "Accept": "application/vnd.github.v3+json",
         "Authorization": f"token {func_token}",
