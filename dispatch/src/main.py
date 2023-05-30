@@ -10,6 +10,7 @@ def main():
     func_token =  str(os.environ["func_token"])
     payload =  str(os.environ["payload"])
     workflow_id = str(os.environ["workflow_id"])
+    branch =  str(os.environ["branch"])
     
 
     
@@ -28,9 +29,9 @@ def repo_dispatch(payload, workflow_id, github_url, org, callee_repo_name, func_
     data = {
         "event_type": f"{workflow_id}",
         "client_payload": {
-            "payload": payload
-          
-        }
+            "payload": payload  
+        },
+         "ref": f"refs/heads/{branch}"
     }
 
     response = requests.post(
