@@ -26,6 +26,7 @@ jobs:
               TARGET_REPO: ${{ env.TARGET_REPO }} 
               func_token: ${{secrets.func_token}}
               workflow_id: ${{ env.workflow_id }} 
+              branch: feature
               
 
 
