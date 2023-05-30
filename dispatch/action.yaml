@@ -21,7 +21,7 @@
   workflow_id:
        description: The ID of the workflow. You can also pass the workflow file name as a string
        required: true
-   branch:
+  branch:
         required: false
         default: main
         
