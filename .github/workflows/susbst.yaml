@@ -20,5 +20,6 @@ jobs:
         shell: bash
         run: |
             source ~/.bash_profile
-            envsubst < app.yaml > tmp.yaml
-            mv tmp.yaml app.yaml
+            envsubst < app.json > tmp.json
+            mv tmp.json app.json
+            cat app.json
