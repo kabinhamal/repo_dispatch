@@ -23,4 +23,9 @@ jobs:
             source ~/.bash_profile
             envsubst < app.json > tmp.json
             mv tmp.json app.json
-            cat app.json
+            CONTENT=$(cat app.json)
+            echo "$CONTENT"
+            json_string=$(echo "$CONTENT" | jq -c .)
+            echo "'$json_string'"
+            echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+
