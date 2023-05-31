@@ -16,7 +16,9 @@ jobs:
           echo "PROJECT=Default Project" >> $GITHUB_ENV
           echo "WORKSPACE=fedspn" >> $GITHUB_ENV
 
-      - name: Substitute environment variables in JSON template
+      - name: Render Helm Chart
+        shell: bash
         run: |
-          envsubst < app.json.template > app.json
-          cat app.json
+            source ~/.bash_profile
+            envsubst < app.yaml > tmp.yaml
+            mv tmp.yaml app.yaml
