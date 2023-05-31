@@ -14,7 +14,7 @@ jobs:
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "PROJECT=Default Project" >> $GITHUB_ENV
-          echo "WORKSPACE=fedspn_test-dev" >> $GITHUB_ENV
+          echo "WORKSPACE=fedspn >> $GITHUB_ENV
 
       - name: Substitute environment variables in JSON template
         run: |
