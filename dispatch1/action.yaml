@@ -1,0 +1,63 @@
+ name: 'Repo Dispatch'
+ description: 'repodispatch for triggering'
+ 
+  
+ inputs:
+  payload:
+    description: appID
+    required: true
+  org:
+     description: Github Org name
+     required: false
+     default: 'kabinhamal'
+  callee_repo_name:
+     description: Github repos to be triggered
+     required: false
+     default: 'callee_repo'
+  func_token:
+      description: github_func_token to nake repo_dispatch 
+      required: true
+  workflow_id:
+       description: The ID of the workflow. You can also pass the workflow file name as a string
+       required: true
+  branch:
+       description: The ID of the workflow. You can also pass the workflow file name as a string
+       required: true
+  
+
+ runs:
+  using: 'composite'
+  steps:
+    - name: checkout
+      uses: actions/checkout@v3
+     
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'  
+
+    - name: Install Dependencies
+      run: pip install -r ${GITHUB_ACTION_PATH}/requirements.txt
+      shell: bash
+
+
+    - name:  run python script
+      id: vault
+      shell: bash
+      env: 
+        payload: ${{ inputs.payload }} 
+        org:  ${{ inputs.org }}
+        callee_repo_name:  ${{ inputs.callee_repo_name }}
+        func_token:  ${{ inputs.func_token}} 
+        workflow_id: ${{ inputs.workflow_id}} 
+        branch: ${{ inputs.branch}} 
+      run: |
+       echo "${GITHUB_ACTION_PATH}"
+       python ${GITHUB_ACTION_PATH}/src/main.py  
+
+   
+
+
+    
+             
+          
