@@ -1,1 +1,23 @@
+name: Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set environment variables
+        run: |
+          echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+          echo "PROJECT=Default Project" >> $GITHUB_ENV
+          echo "WORKSPACE=fedspn_test-dev" >> $GITHUB_ENV
+
+      - name: Substitute environment variables in JSON template
+        run: |
+          envsubst < app.json.template > app.json
+          cat app.json
 
