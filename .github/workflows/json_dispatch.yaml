@@ -1,6 +1,6 @@
 name: Trigger repo feature (successful).
 on:
-   - push  
+  # - push  
    -  workflow_dispatch
 
 env:
