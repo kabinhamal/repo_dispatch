@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+env:  
+      workflow_id: "repo_dispatch1"
+      callee_repo_name:  "callee_repo"
 
 jobs:
-  example_job:
+  sub_env_and_dispatch:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,4 +32,13 @@ jobs:
             json_string=$(echo "$CONTENT" | jq -c .)
             echo "'$json_string'"
             echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+            
+      - name: Repo Dispatch
+        id: dispatch
+        uses: kabinhamal/repo_dispatch/dispatch@main
+        with:
+          payload: ${{ env.REPO_JSON }}                     
+          calee_repo_name: ${{ env.callee_repo_name }} 
+          func_token: ${{secrets.func_token}}
+          workflow_id: ${{ env.workflow_id }} 
 
