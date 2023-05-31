@@ -38,7 +38,7 @@ jobs:
         uses: kabinhamal/repo_dispatch/dispatch1@main
         with:
           payload: ${{ env.REPO_JSON }}                     
-          calee_repo_name: ${{ env.callee_repo_name }} 
+          callee_repo_name: ${{ env.callee_repo_name }} 
           func_token: ${{secrets.func_token}}
           workflow_id: ${{ env.workflow_id }} 
           branch: feature
