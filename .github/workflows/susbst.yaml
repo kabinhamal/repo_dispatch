@@ -1,4 +1,4 @@
-name: substitute the value in app.json
+name: substitute the value in app.json??
 
 on:
   push:
