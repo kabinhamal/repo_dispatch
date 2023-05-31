@@ -11,13 +11,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
       - name: Set environment variables
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "PROJECT=Default Project" >> $GITHUB_ENV
           echo "WORKSPACE=fedspn" >> $GITHUB_ENV
 
-      - name: Render Helm Chart
+      - name: Substitute the env vars in app.json
         shell: bash
         run: |
             source ~/.bash_profile
