@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:  
-      workflow_id: "repo_dispatch1"
+      workflow_id: "repo_dispatch1_feature"
       callee_repo_name:  "callee_repo"
 
 jobs:
