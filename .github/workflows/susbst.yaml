@@ -28,7 +28,7 @@ jobs:
         run: |
           list_string='["Event Hub", "Azure SQL"]'
           result=($(echo "$list_string" | jq -r '.[]'))
-          echo "WORKSPACE=$result" >> $GITHUB_ENV
+          echo "::set-output name=list_var::${result[@]}"
           
           
       - name: Substitute the env vars in app.json
