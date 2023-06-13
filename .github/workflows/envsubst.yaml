@@ -15,39 +15,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-            python-version: 3.x
-
-      - name: Parse list data
-        id: parse
-        run: |
-          import json
-          #list_data = json.loads('${{ github.event.client_payload.list_data }}')
-          list_data = ${{env.workspace}}
-          echo "workspace=$list_data" >> $GITHUB_ENV
-
-      - name: Use the list
-        run: |
-          # Access the list data from the environment variable
-          workspace=$LIST_DATA
-          echo $workspace
-
-
       
       - name: Substitute the env vars in app.json and remove extra quotes
         run: |
-          source ~/.bash_profile  
-          envsubst < app.json > tmp.json
-          mv tmp.json app.json
-          CONTENT=$(cat app.json)
-          echo "$CONTENT"
-          json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace'   
-          # json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace')
-          echo "'$json_string'"
-          # echo "REPO_JSON='{\"serviceprincipal\":{\"fedspn_test\":{\"federated_identity\":{\"workspace\": $json_string}}}}'" >> $GITHUB_ENV
-
+          json_string= ${{env.WORKSPACE}}
+          echo $json_string
+          
 
 
 #       - name: Set REPO_JSON environment variable
