@@ -7,7 +7,7 @@ env:
   callee_repo_name: "callee_repo"
   ENVIRONMENT: "dev"
   PROJECT: "Default Project"
-  WORKSPACE: '["Event Hub", "Azure SQL"]'
+  workspace: '["Event Hub", "Azure SQL"]'
 
 jobs:
   sub_env_and_dispatch:
@@ -15,27 +15,38 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Substitute the env vars in app.json and remove extra quotes
+
+      - name: Substitute the env vars in app.json
         run: |
-          json_string= '["Event Hub", "Azure SQL"]'
-          json_string="${json_string//\"/}"  # Remove double quotes
-          echo "$json_string"  # Output the modified string 
-          echo $json_string
+          jq --argjson workspace "$WORKSPACE" \
+              .serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
+          mv tmp.json app.json
+
+      - name: Read and display app.json
+        run: |
+          cat app.json
+
+      - name: Set REPO_JSON environment variable
+        run: |
+            source ~/.bash_profile
+            envsubst < app.json > tmp.json
+            mv tmp.json app.json
+            CONTENT=$(cat app.json)
+            echo "$CONTENT"
+            jq --argjson workspace "$workspace" \
+              .serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
+            json_string=$(echo "$CONTENT" | jq -c .)
+            echo "'$json_string'"
+            #echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+
           
 
-
-#       - name: Set REPO_JSON environment variable
-#         run: |
-#           json_string=$(jq -c . app.json)
-#           echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
-
-#       - name: Repo Dispatch
-#         id: dispatch
-#         uses: kabinhamal/repo_dispatch/dispatch1@main
-#         with:
-#           payload: ${{ env.REPO_JSON }}
-#           callee_repo_name: ${{ env.callee_repo_name }}
-#           func_token: ${{ secrets.func_token }}
-#           workflow_id: ${{ env.workflow_id }}
-#           branch: feature
+      - name: Repo Dispatch
+        id: dispatch
+        uses: kabinhamal/repo_dispatch/dispatch1@main
+        with:
+          payload: ${{ env.REPO_JSON }}
+          callee_repo_name: ${{ env.callee_repo_name }}
+          func_token: ${{ secrets.func_token }}
+          workflow_id: ${{ env.workflow_id }}
+          branch: feature
