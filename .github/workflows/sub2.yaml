@@ -5,6 +5,8 @@ on:
 env:
   workflow_id: "repo_dispatch1_feature"
   callee_repo_name: "callee_repo"
+  ENVIRONMENT: "dev"
+  PROJECT: "Default Project"
   WORKSPACE: '["Event Hub", "Azure SQL"]'
 
 jobs:
@@ -14,14 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set environment variables
-        run: |
-          echo "ENVIRONMENT=dev" >> $GITHUB_ENV
-          echo "PROJECT=Default Project" >> $GITHUB_ENV
-
       - name: Substitute the env vars in app.json
         run: |
-          jq --argjson workspace "$WORKSPACE" '.serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
+          jq --arg environment "$ENVIRONMENT" \
+             --arg project "$PROJECT" \
+             --argjson workspace "$WORKSPACE" \
+             '.serviceprincipal[].environment = $environment |
+              .serviceprincipal[].federated_identity.environment = $environment |
+              .serviceprincipal[].federated_identity.project = $project |
+              .serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
           mv tmp.json app.json
 
       - name: Read and display app.json
