@@ -22,16 +22,14 @@ jobs:
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "PROJECT=Default Project" >> $GITHUB_ENV
         #  echo "WORKSPACE=fedspn" >> $GITHUB_ENV
+        
+        
       - name: Convert string to list
         id: convert
         run: |
           list_string='["Event Hub", "Azure SQL"]'
-          result=$(echo "$list_string" | jq -r 'map(@json) | join(", ")')
+          result=$(echo "$list_string" | jq -c .)
           echo "WORKSPACE=\"$result\"" >> $GITHUB_ENV
-
-      - name: Show result
-        run: |
-          echo "WORKSPACE: $WORKSPACE"
           
           
       - name: Substitute the env vars in app.json
