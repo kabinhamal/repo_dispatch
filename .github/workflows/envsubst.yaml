@@ -26,13 +26,15 @@ jobs:
 #           cat app.json
       - name: Substitute the env vars in app.json and remove extra quotes
         run: |
+          source ~/.bash_profile
           envsubst < app.json > tmp.json
           mv tmp.json app.json
           CONTENT=$(cat app.json)
           echo "$CONTENT"
-          json_string=$(echo "$CONTENT" | jq -c '(.serviceprincipal.fedspn_test.federated_identity.workspace | fromjson)')
+          json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace')
           echo "'$json_string'"
-          #  echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+          echo "REPO_JSON='{\"serviceprincipal\":{\"fedspn_test\":{\"federated_identity\":{\"workspace\": $json_string}}}}'" >> $GITHUB_ENV
+
 
 
 #       - name: Set REPO_JSON environment variable
