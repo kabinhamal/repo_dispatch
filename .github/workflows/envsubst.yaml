@@ -18,7 +18,7 @@ jobs:
       
       - name: Substitute the env vars in app.json and remove extra quotes
         run: |
-          json_string= ${{env.WORKSPACE}}
+          json_string= '["Event Hub", "Azure SQL"]'
           json_string="${json_string//\"/}"  # Remove double quotes
           echo "$json_string"  # Output the modified string 
           echo $json_string
