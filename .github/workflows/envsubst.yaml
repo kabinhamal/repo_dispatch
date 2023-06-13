@@ -37,9 +37,7 @@ jobs:
                '.serviceprincipal[].federated_identity.workspace = $workspace' app1.json > tmp.json
             mv tmp.json app.json
             cat app.json
-
-            
-            #echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+            # echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
           
 
