@@ -26,17 +26,15 @@ jobs:
       - name: Substitute the env vars in app.json
         shell: bash
         run: |
-          source ~/.bash_profile
-          workspace=$(jq -c '.workspace' workspace.json)
-          envsubst '${WORKSPACE}' < app.json | jq --argjson workspace "$workspace" '.serviceprincipal[].federated_identity.workspace = $workspace' > tmp.json
-          mv tmp.json app.json
-          CONTENT=$(cat app.json)
-          echo "$CONTENT"
-          json_string=$(echo "$CONTENT" | jq -c .)
-          echo "'$json_string'"
-          echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+            source ~/.bash_profile
+            envsubst < app.json > tmp.json
+            mv tmp.json app.json
+            CONTENT=$(cat app.json)
+            echo "$CONTENT"
+            json_string=$(echo "$CONTENT" | jq -c .)
+            echo "'$json_string'"
+            echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
-           
             
       - name: Repo Dispatch
         id: dispatch
