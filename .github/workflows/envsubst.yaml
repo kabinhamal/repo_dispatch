@@ -33,6 +33,10 @@ jobs:
             mv tmp.json app.json
             CONTENT=$(cat app.json)
             echo "$CONTENT"
+            jq --argjson workspace "$WORKSPACE" \
+               .serviceprincipal[].federated_identity.workspace = $workspace' $CONTENT > tmp.json
+            mv tmp.json app.json
+
             
             #echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
