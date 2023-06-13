@@ -15,24 +15,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
 
-#       - name: Substitute the env vars in app.json
-#         run: |
-#           cat app.json | envsubst > tmp.json
-#           mv tmp.json app.json
+      - name: Parse list data
+        id: parse
+        run: |
+          import json
+          #list_data = json.loads('${{ github.event.client_payload.list_data }}')
+          list_data = ${{env.workspace}}
+          echo "workspace=$list_data" >> $GITHUB_ENV
 
-#       - name: Read and display app.json
-#         run: |
-#           cat app.json
+      - name: Use the list
+        run: |
+          # Access the list data from the environment variable
+          workspace=$LIST_DATA
+          echo $workspace
+
+
       
       - name: Substitute the env vars in app.json and remove extra quotes
         run: |
-          list_string='["Event Hub", "Azure SQL"]'
-          result='['$(echo "$list_string" | sed 's/\"/\\\"/g')']'
-          echo "LIST_VAR=$result" >> $GITHUB_ENV
-          
-          
-          
           source ~/.bash_profile  
           envsubst < app.json > tmp.json
           mv tmp.json app.json
