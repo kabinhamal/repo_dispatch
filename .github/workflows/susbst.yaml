@@ -3,7 +3,7 @@ name: substitute the value in app.json??
 on:
   push:
     branches:
-      - main
+     # - main
 env:  
       workflow_id: "repo_dispatch1_feature"
       callee_repo_name:  "callee_repo"
