@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - featue
 env:
   workflow_id: "repo_dispatch1_feature"
   callee_repo_name: "callee_repo"
