@@ -34,7 +34,7 @@ jobs:
             CONTENT=$(cat app.json)
             echo "$CONTENT"
             jq --argjson workspace "$WORKSPACE" \
-               .serviceprincipal[].federated_identity.workspace = $workspace' $CONTENT > tmp.json
+               '.serviceprincipal[].federated_identity.workspace = $workspace' $CONTENT > tmp.json
             mv tmp.json app.json
 
             
