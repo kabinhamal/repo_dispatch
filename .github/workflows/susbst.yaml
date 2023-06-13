@@ -40,18 +40,19 @@ jobs:
             mv tmp.json app.json
             CONTENT=$(cat app.json)
             echo "$CONTENT"
-            json_string=$(echo "$CONTENT" | jq -c .)
-            echo "'$json_string'"
-            echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+            
+            #json_string=$(echo "$CONTENT" | jq -c .)
+            #echo "'$json_string'"
+            #echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
             
-      - name: Repo Dispatch
-        id: dispatch
-        uses: kabinhamal/repo_dispatch/dispatch1@main
-        with:
-          payload: ${{ env.REPO_JSON }}                     
-          callee_repo_name: ${{ env.callee_repo_name }} 
-          func_token: ${{secrets.func_token}}
-          workflow_id: ${{ env.workflow_id }} 
-          branch: feature
+#       - name: Repo Dispatch
+#         id: dispatch
+#         uses: kabinhamal/repo_dispatch/dispatch1@main
+#         with:
+#           payload: ${{ env.REPO_JSON }}                     
+#           callee_repo_name: ${{ env.callee_repo_name }} 
+#           func_token: ${{secrets.func_token}}
+#           workflow_id: ${{ env.workflow_id }} 
+#           branch: feature
 
