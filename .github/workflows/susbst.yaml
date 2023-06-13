@@ -7,6 +7,8 @@ on:
 env:  
       workflow_id: "repo_dispatch1_feature"
       callee_repo_name:  "callee_repo"
+      WORKSPACE: '["test", "rest"]'
+      
 
 jobs:
   sub_env_and_dispatch:
@@ -19,7 +21,7 @@ jobs:
         run: |
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "PROJECT=Default Project" >> $GITHUB_ENV
-          echo "WORKSPACE=fedspn" >> $GITHUB_ENV
+        #  echo "WORKSPACE=fedspn" >> $GITHUB_ENV
 
       - name: Substitute the env vars in app.json
         shell: bash
