@@ -16,19 +16,29 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Substitute the env vars in app.json
+#       - name: Substitute the env vars in app.json
+#         run: |
+#           cat app.json | envsubst > tmp.json
+#           mv tmp.json app.json
+
+#       - name: Read and display app.json
+#         run: |
+#           cat app.json
+      - name: Substitute the env vars in app.json and remove extra quotes
         run: |
-          cat app.json | envsubst > tmp.json
+          envsubst < app.json > tmp.json
           mv tmp.json app.json
-
-      - name: Read and display app.json
-        run: |
-          cat app.json
-
-      - name: Set REPO_JSON environment variable
-        run: |
-          json_string=$(jq -c . app.json)
+          CONTENT=$(cat app.json)
+          echo "$CONTENT"
+          json_string=$(echo "$CONTENT" | jq -c '(.serviceprincipal.fedspn_test.federated_identity.workspace | fromjson)')
+          echo "'$json_string'"
           echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+
+
+#       - name: Set REPO_JSON environment variable
+#         run: |
+#           json_string=$(jq -c . app.json)
+#           echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
 
       - name: Repo Dispatch
         id: dispatch
