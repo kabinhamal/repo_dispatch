@@ -26,10 +26,8 @@ jobs:
         id: convert
         shell: bash
         run: |
-          import json
           list_string='["Event Hub", "Azure SQL"]'
-          result=$(python3 -c "import json; print(json.loads('$list_string'))")
-          echo "$result"
+          result=($(echo "$list_string" | jq -r '.[]'))
           echo "WORKSPACE=$result" >> $GITHUB_ENV
           
           
