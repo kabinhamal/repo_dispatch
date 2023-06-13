@@ -7,7 +7,7 @@ on:
 env:  
       workflow_id: "repo_dispatch1_feature"
       callee_repo_name:  "callee_repo"
-      WORKSPACE: '["test", "rest"]'
+     # WORKSPACE: '["test", "rest"]'
       
 
 jobs:
@@ -22,7 +22,17 @@ jobs:
           echo "ENVIRONMENT=dev" >> $GITHUB_ENV
           echo "PROJECT=Default Project" >> $GITHUB_ENV
         #  echo "WORKSPACE=fedspn" >> $GITHUB_ENV
-
+      - name: Convert string to list
+        id: convert
+        shell: bash
+        run: |
+          import json
+          list_string='["Event Hub", "Azure SQL"]'
+          result=$(python -c "import json; print(json.loads('$list_string'))")
+          echo "$result"
+          echo "WORKSPACE=$result" >> $GITHUB_ENV
+          
+          
       - name: Substitute the env vars in app.json
         shell: bash
         run: |
