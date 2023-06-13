@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - main
+env:
+  workflow_id: "repo_dispatch1_feature"
+  callee_repo_name: "callee_repo"
+  ENVIRONMENT: "dev"
+  PROJECT: "Default Project"
+  WORKSPACE: '["Event Hub", "Azure SQL"]'
+
+jobs:
+  sub_env_and_dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Substitute the env vars in app.json
+        run: |
+          cat app.json | envsubst > tmp.json
+          mv tmp.json app.json
+
+      - name: Read and display app.json
+        run: |
+          cat app.json
+
+      - name: Set REPO_JSON environment variable
+        run: |
+          json_string=$(jq -c . app.json)
+          echo "REPO_JSON='$json_string'" >> $GITHUB_ENV
+
+      - name: Repo Dispatch
+        id: dispatch
+        uses: kabinhamal/repo_dispatch/dispatch1@main
+        with:
+          payload: ${{ env.REPO_JSON }}
+          callee_repo_name: ${{ env.callee_repo_name }}
+          func_token: ${{ secrets.func_token }}
+          workflow_id: ${{ env.workflow_id }}
+          branch: feature
