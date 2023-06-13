@@ -31,7 +31,7 @@ jobs:
           mv tmp.json app.json
           CONTENT=$(cat app.json)
           echo "$CONTENT"
-          json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace' | sed 's/\\//g')
+          json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace' | sed 's/[][]//g')
           # json_string=$(echo "$CONTENT" | jq -r '.serviceprincipal.fedspn_test.federated_identity.workspace')
           echo "'$json_string'"
           # echo "REPO_JSON='{\"serviceprincipal\":{\"fedspn_test\":{\"federated_identity\":{\"workspace\": $json_string}}}}'" >> $GITHUB_ENV
