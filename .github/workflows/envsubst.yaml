@@ -24,9 +24,14 @@ jobs:
 #       - name: Read and display app.json
 #         run: |
 #           cat app.json
+      
       - name: Substitute the env vars in app.json and remove extra quotes
         run: |
-          source ~/.bash_profile
+          list_string='["Event Hub", "Azure SQL"]'
+          result=$(eval echo $list_string)
+          echo $result
+          echo "WORKSPACE=$result" >> $GITHUB_ENV
+          source ~/.bash_profile  
           envsubst < app.json > tmp.json
           mv tmp.json app.json
           CONTENT=$(cat app.json)
