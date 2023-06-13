@@ -30,11 +30,11 @@ jobs:
         run: |
             source ~/.bash_profile
             envsubst < app.json > tmp.json
-            mv tmp.json app.json
+            mv tmp.json app1.json
             CONTENT=$(cat app.json)
             echo "$CONTENT"
             jq --argjson workspace "$WORKSPACE" \
-               '.serviceprincipal[].federated_identity.workspace = $workspace' $CONTENT > tmp.json
+               '.serviceprincipal[].federated_identity.workspace = $workspace' app1.json > tmp.json
             mv tmp.json app.json
 
             
