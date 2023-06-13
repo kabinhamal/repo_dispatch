@@ -16,11 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Substitute the env vars in app.json
-        run: |
-          jq --argjson workspace "$WORKSPACE" \
-              .serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
-          mv tmp.json app.json
+#       - name: Substitute the env vars in app.json
+#         run: |
+#           jq --argjson workspace "$WORKSPACE" \
+#               .serviceprincipal[].federated_identity.workspace = $workspace' app.json > tmp.json
+#           mv tmp.json app.json
 
       - name: Read and display app.json
         run: |
